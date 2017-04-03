@@ -1,0 +1,29 @@
+{
+  "name": "diagram-js-minimap",
+  "version": "0.0.0",
+  "description": "A minimap for diagram-js",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bpmn-io/diagram-js-minimap.git"
+  },
+  "keywords": [
+    "diagram-js",
+    "minimap"
+  ],
+  "author": "Philipp Fromme",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bpmn-io/diagram-js-minimap/issues"
+  },
+  "homepage": "https://github.com/bpmn-io/diagram-js-minimap#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-release": "^0.14.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "min-dom": "^0.2.0",
+    "tiny-svg": "^0.1.1"
+  }
+}
