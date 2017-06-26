@@ -18,11 +18,11 @@
   },
   "homepage": "https://github.com/bpmn-io/diagram-js-minimap#readme",
   "devDependencies": {
-    "css.escape": "^1.5.1",
     "grunt": "^1.0.1",
     "grunt-release": "^0.14.0"
   },
   "dependencies": {
+    "css.escape": "^1.5.1",
     "lodash": "^3.0.1",
     "min-dom": "^0.2.0",
     "tiny-svg": "^0.1.1"
