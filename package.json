@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/bpmn-io/diagram-js-minimap#readme",
   "devDependencies": {
+    "css.escape": "^1.5.1",
     "grunt": "^1.0.1",
     "grunt-release": "^0.14.0"
   },
