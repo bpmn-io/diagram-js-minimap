@@ -1,0 +1,4 @@
+resources/
+test/
+.eslintrc
+karma.conf.js
