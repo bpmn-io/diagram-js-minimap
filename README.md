@@ -2,7 +2,7 @@
 
 A minimap for diagram-js
 
-![Minimap](docs/screenshot.png)
+![Minimap](resources/screenshot.png)
 
 ## Features
 
