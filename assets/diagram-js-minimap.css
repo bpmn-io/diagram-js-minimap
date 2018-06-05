@@ -2,16 +2,19 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  overflow: hidden;
+  overflow: visible;
   background-color: rgba(255, 255, 255, 0.9);
   border: solid 1px #CCC;
   border-radius: 2px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   -webkit-user-select: none;
+}
+
+.djs-minimap:not(.open) {
+  overflow: hidden;
 }
 
 .djs-minimap .map {
@@ -27,10 +30,6 @@
   height: 180px;
 }
 
-.djs-minimap .toggle {
-  background-color: rgb(250, 250, 250);
-}
-
 .djs-minimap:not(.open) .toggle {
   width: 46px;
   height: 46px;
@@ -43,18 +42,36 @@
 }
 
 .djs-minimap.open .toggle {
-  width: 100%;
-  height: auto;
+  position: absolute;
+  right: 0;
   padding: 6px;
-  text-align: right;
 }
 
 .djs-minimap.open .toggle:before {
   content: 'Close';
 }
 
+.djs-minimap .map {
+  cursor: crosshair;
+}
+
 .djs-minimap .viewport {
-  fill: rgba(255, 116, 0, 0.25);
+  /* fill: rgba(255, 116, 0, 0.25); */
+  fill: none;
+  stroke: none;
+}
+
+.djs-minimap .viewport-dom {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.1);
+  border: solid 1px #CCC;
+  border-radius: 2px;
+  box-sizing: border-box;
+  cursor: move;
+}
+
+.djs-minimap:not(.open) .viewport-dom {
+  display: none;
 }
 
 .djs-minimap .cursor-crosshair {
