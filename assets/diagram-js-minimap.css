@@ -1,0 +1,66 @@
+.djs-minimap {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: solid 1px #CCC;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+}
+
+.djs-minimap .map {
+  display: none;
+}
+
+.djs-minimap.open .map {
+  display: block;
+}
+
+.djs-minimap .map {
+  width: 320px;
+  height: 180px;
+}
+
+.djs-minimap .toggle {
+  background-color: rgb(250, 250, 250);
+}
+
+.djs-minimap:not(.open) .toggle {
+  width: 46px;
+  height: 46px;
+  line-height: 46px;
+  text-align: center;
+}
+
+.djs-minimap:not(.open) .toggle:before {
+  content: 'Open';
+}
+
+.djs-minimap.open .toggle {
+  width: 100%;
+  height: auto;
+  padding: 6px;
+  text-align: right;
+}
+
+.djs-minimap.open .toggle:before {
+  content: 'Close';
+}
+
+.djs-minimap .viewport {
+  fill: rgba(255, 116, 0, 0.25);
+}
+
+.djs-minimap .cursor-crosshair {
+  cursor: crosshair;
+}
+
+.djs-minimap .cursor-move {
+  cursor: move;
+}
