@@ -37,3 +37,8 @@ For proper styling integrate the embedded style sheet:
 ```
 
 Please see [this example](https://github.com/bpmn-io/bpmn-js-examples/tree/master/minimap) for a more detailed instruction.
+
+
+## License
+
+MIT
