@@ -32,7 +32,7 @@ var bpmnModeler = new BpmnModeler({
 
 For proper styling integrate the embedded style sheet:
 
-```
+```html
 <link rel="stylesheet" href="diagram-js-minimap/assets/diagram-js-minimap.css" />
 ```
 
