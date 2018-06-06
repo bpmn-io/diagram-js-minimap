@@ -22,9 +22,9 @@ A minimap for diagram-js.
 Extend your diagram-js application with the minimap module. We'll use [bpmn-js](https://github.com/bpmm-io/bpmn-js) as an example:
 
 ```javascript
-var BpmnModeler = require('bpmn-js/lib/Modeler');
+import BpmnModeler from 'bpmn-js/lib/Modeler';
 
-var minimapModule = require('diagram-js-minimap');
+import minimapModule from 'diagram-js-minimap';
 
 var bpmnModeler = new BpmnModeler({
   additionalModules: [
