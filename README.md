@@ -19,29 +19,21 @@ A minimap for diagram-js.
 Extend your diagram-js application with the minimap module. We'll use [bpmn-js](https://github.com/bpmm-io/bpmn-js) as an example:
 
 ```javascript
-
 var BpmnModeler = require('bpmn-js/lib/Modeler');
 
 var minimapModule = require('diagram-js-minimap');
 
-var canvas = $('#js-canvas');
-
 var bpmnModeler = new BpmnModeler({
-  container: canvas,
   additionalModules: [
     minimapModule
   ]
 });
+```
 
-bpmnModeler.importXML(xml, function(err) {
+For proper styling integrate the embedded style sheet:
 
-  if (err) {
-      console.error(err);
-    } else {
-      console.log('Awesome! Ready to navigate!');
-    }
-  });
-
+```
+<link rel="stylesheet" href="diagram-js-minimap/assets/diagram-js-minimap.css" />
 ```
 
 Please see [this example](https://github.com/bpmn-io/bpmn-js-examples/tree/master/minimap) for a more detailed instruction.
