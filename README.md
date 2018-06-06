@@ -1,3 +1,6 @@
+> As of version `1.0.0` this library exposes ES modules. Use an ES module aware transpiler such as Webpack, Rollup or Browserify + babelify to bundle it for the browser.
+
+
 # diagram-js Minimap
 
 [![Build Status](https://travis-ci.org/bpmn-io/diagram-js-minimap.svg?branch=master)](https://travis-ci.org/bpmn-io/diagram-js-minimap)

@@ -16,9 +16,9 @@ var browsers =
         if (process.platform === 'linux') {
           return 'ChromeHeadless_Linux';
         }
-      } else {
-        return browser;
       }
+
+      return browser;
     });
 
 
@@ -59,7 +59,14 @@ module.exports = function(karma) {
 
     // browserify configuration
     browserify: {
-      debug: true
+      debug: true,
+      transform: [
+        [ 'babelify', { global: true } ],
+        [ 'stringify', {
+          global: true,
+          extensions: [ '.css' ]
+        } ]
+      ]
     }
   });
 };
