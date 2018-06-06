@@ -1,13 +1,18 @@
-# diagram-js-minimap
+# diagram-js Minimap
 
-A minimap for diagram-js
+[![Build Status](https://travis-ci.org/bpmn-io/diagram-js-minimap.svg?branch=master)](https://travis-ci.org/bpmn-io/diagram-js-minimap)
+
+A minimap for diagram-js.
 
 ![Minimap](resources/screenshot.png)
+
 
 ## Features
 
 * See the whole diagram in the minimap
+* Highlight current viewport
 * Click/drag/scroll the minimap to navigate the diagram
+
 
 ## Usage
 
