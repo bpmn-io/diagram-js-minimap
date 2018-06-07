@@ -1,3 +1,9 @@
+/* global sinon */
+
+import {
+  remove as domRemove
+} from 'min-dom';
+
 import {
   bootstrapDiagram,
   inject,
@@ -112,6 +118,35 @@ describe('minimap', function() {
       canvas.addShape(shapeC, canvas.getRootElement());
     }));
 
+  });
+
+  describe('canvas.resized', function() {
+
+    beforeEach(bootstrapDiagram({
+      modules: [
+        minimapModule,
+        moveCanvasModule,
+        zoomScrollModule
+      ],
+      minimap: {
+        open: true
+      }
+    }));
+
+
+    it('should not update if not present in DOM', inject(function(canvas, eventBus, minimap) {
+
+      // given
+      var spy = sinon.spy(minimap, '_update');
+
+      // when
+      domRemove(canvas.getContainer());
+
+      eventBus.fire('canvas.resized');
+
+      // then
+      expect(spy).to.not.have.been.called;
+    }));
   });
 
 });
