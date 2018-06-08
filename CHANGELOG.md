@@ -6,8 +6,12 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.1.0
+
+* `FEAT`: align minimap to canvas (0, 0) if possible ([#17](https://github.com/bpmn-io/diagram-js-minimap/issues/17))
 * `FIX`: make close handle always clickable ([#18](https://github.com/bpmn-io/diagram-js-minimap/issues/18))
 * `FIX`: correct stepping when zooming out ([#19](https://github.com/bpmn-io/diagram-js-minimap/issues/19))
+* `FIX`: use same zoom directions like diagram-js `ZoomScroll`
 
 ## 1.0.0
 
@@ -19,8 +23,8 @@ ___Note:__ Yet to be released changes appear here._
 
 * `FEAT`: improved minimap UX ([#4](https://github.com/bpmn-io/diagram-js-minimap/issues/4))
 * `FEAT`: add more intuitive open / close controls ([#5](https://github.com/bpmn-io/diagram-js-minimap/issues/5))
-* `FIX`: disallow minimap zoom outside of minimap ([153093be](https://github.com/bpmn-io/diagram-js-minimap/commit/153093be7f9b3999d2b2653613db427aecb83687))
-* `FIX`: ignore canvas.resized events if not present in DOM ([24614f86](https://github.com/bpmn-io/diagram-js-minimap/commit/24614f86856a7e1b75950ffbb1a96d2d11541b5c))
+* `FIX`: disallow minimap zoom outside of minimap ([`153093be`](https://github.com/bpmn-io/diagram-js-minimap/commit/153093be7f9b3999d2b2653613db427aecb83687))
+* `FIX`: ignore canvas.resized events if not present in DOM ([`24614f86`](https://github.com/bpmn-io/diagram-js-minimap/commit/24614f86856a7e1b75950ffbb1a96d2d11541b5c))
 * `FIX`: correct wheel / click interaction ([#12](https://github.com/bpmn-io/diagram-js-minimap/issues/12))
 * `FIX`: properly cleanup global event listeners ([#16](https://github.com/bpmn-io/diagram-js-minimap/issues/16))
 
