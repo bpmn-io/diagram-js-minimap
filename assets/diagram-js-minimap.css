@@ -45,6 +45,7 @@
   position: absolute;
   right: 0;
   padding: 6px;
+  z-index: 1;
 }
 
 .djs-minimap.open .toggle:before {
