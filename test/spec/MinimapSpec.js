@@ -118,7 +118,22 @@ describe('minimap', function() {
       canvas.addShape(shapeC, canvas.getRootElement());
     }));
 
+
+    it('should show single element', inject(function(canvas, elementFactory) {
+
+      var shapeA = elementFactory.createShape({
+        id: 'A',
+        width: 100,
+        height: 300,
+        x: 50,
+        y: 150
+      });
+
+      canvas.addShape(shapeA, canvas.getRootElement());
+    }));
+
   });
+
 
   describe('canvas.resized', function() {
 
@@ -134,19 +149,21 @@ describe('minimap', function() {
     }));
 
 
-    it('should not update if not present in DOM', inject(function(canvas, eventBus, minimap) {
+    it('should not update if not present in DOM', inject(
+      function(canvas, eventBus, minimap) {
 
-      // given
-      var spy = sinon.spy(minimap, '_update');
+        // given
+        var spy = sinon.spy(minimap, '_update');
 
-      // when
-      domRemove(canvas.getContainer());
+        // when
+        domRemove(canvas.getContainer());
 
-      eventBus.fire('canvas.resized');
+        eventBus.fire('canvas.resized');
 
-      // then
-      expect(spy).to.not.have.been.called;
-    }));
+        // then
+        expect(spy).to.not.have.been.called;
+      }
+    ));
   });
 
 });
