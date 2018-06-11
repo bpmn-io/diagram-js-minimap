@@ -6,6 +6,10 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.1.1
+
+* `FIX`: export `Minimap` as ES module
+
 ## 1.1.0
 
 * `FEAT`: align minimap to canvas (0, 0) if possible ([#17](https://github.com/bpmn-io/diagram-js-minimap/issues/17))
