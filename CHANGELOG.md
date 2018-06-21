@@ -6,6 +6,10 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.1.2
+
+* `FIX`: use `svgClasses` for IE 11 compatibility ([#25](https://github.com/bpmn-io/diagram-js-minimap/issues/25))
+
 ## 1.1.1
 
 * `FIX`: export `Minimap` as ES module
