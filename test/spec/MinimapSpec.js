@@ -37,7 +37,7 @@ describe('minimap', function() {
     }));
 
 
-    it('should show', inject(function(canvas, modeling, elementFactory) {
+    it.only('should show', inject(function(canvas, modeling, elementFactory) {
 
       var shapeA = elementFactory.createShape({
         id: 'A',
