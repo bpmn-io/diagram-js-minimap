@@ -7,7 +7,8 @@ import {
 import {
   bootstrapDiagram,
   inject,
-  insertCSS
+  insertCSS,
+  getDiagramJS
 } from '../TestHelper';
 
 import minimapModule from '../../';
@@ -64,6 +65,13 @@ describe('minimap', function() {
       });
 
       modeling.createShape(shapeC, { x: 800, y: 100 }, canvas.getRootElement());
+
+      generateShapes(200, {
+        x: -200,
+        y: -50,
+        width: 3000,
+        height: 1000
+      });
     }));
 
   });
@@ -167,3 +175,32 @@ describe('minimap', function() {
   });
 
 });
+
+
+// helpers /////////////////
+
+function generateShapes(count, viewport) {
+
+  return getDiagramJS().invoke(function(canvas, elementFactory, modeling) {
+
+    var s;
+
+    for (var i = 0; i < count; i++) {
+      s = elementFactory.createShape({
+        id: 'shape' + i,
+        width: rnd(10, 300),
+        height: rnd(10, 200),
+      });
+
+      modeling.createShape(s, {
+        x: rnd(viewport.x, viewport.width),
+        y: rnd(viewport.y, viewport.height)
+      }, canvas.getRootElement());
+    }
+  });
+}
+
+
+function rnd(start, end) {
+  return Math.round(Math.random() * (end - start) + start);
+}
