@@ -6,6 +6,10 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.2.2
+
+__Republish with updated changelog.__
+
 ## 1.2.0
 
 * `FEAT`: zoom on CTRL key only ([`a1848cf8`](https://github.com/bpmn-io/diagram-js-minimap/commit/a1848cf880478a74fb799422780df10f7e6d7d8f))
