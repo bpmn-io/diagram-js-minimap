@@ -19,7 +19,7 @@ A minimap for diagram-js.
 
 ## Usage
 
-Extend your diagram-js application with the minimap module. We'll use [bpmn-js](https://github.com/bpmm-io/bpmn-js) as an example:
+Extend your diagram-js application with the minimap module. We'll use [bpmn-js](https://github.com/bpmn-io/bpmn-js) as an example:
 
 ```javascript
 import BpmnModeler from 'bpmn-js/lib/Modeler';
