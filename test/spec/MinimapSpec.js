@@ -4,6 +4,8 @@ import {
   remove as domRemove
 } from 'min-dom';
 
+import Diagram from 'diagram-js';
+
 import {
   bootstrapDiagram,
   inject,
@@ -22,19 +24,24 @@ import minimapCSS from '../../assets/diagram-js-minimap.css';
 
 insertCSS('diagram-js-minimap.css', minimapCSS);
 
+var viewerModules = [
+  minimapModule,
+  moveCanvasModule,
+  zoomScrollModule
+];
+
+var modelerModules = viewerModules.concat([
+  modelingModule,
+  moveModule
+]);
+
 
 describe('minimap', function() {
 
   describe('in modeler', function() {
 
     beforeEach(bootstrapDiagram({
-      modules: [
-        minimapModule,
-        moveCanvasModule,
-        zoomScrollModule,
-        modelingModule,
-        moveModule
-      ]
+      modules: modelerModules
     }));
 
 
@@ -80,11 +87,7 @@ describe('minimap', function() {
   describe('in viewer', function() {
 
     beforeEach(bootstrapDiagram({
-      modules: [
-        minimapModule,
-        moveCanvasModule,
-        zoomScrollModule
-      ],
+      modules: viewerModules,
       minimap: {
         open: true
       }
@@ -146,11 +149,7 @@ describe('minimap', function() {
   describe('canvas.resized', function() {
 
     beforeEach(bootstrapDiagram({
-      modules: [
-        minimapModule,
-        moveCanvasModule,
-        zoomScrollModule
-      ],
+      modules: viewerModules,
       minimap: {
         open: true
       }
@@ -172,6 +171,26 @@ describe('minimap', function() {
         expect(spy).to.not.have.been.called;
       }
     ));
+  });
+
+
+  describe('update', function() {
+
+    it('should not error on viewbox changed', function() {
+      var diagram = new Diagram({
+        modules: modelerModules
+      });
+
+      var canvas = diagram.get('canvas');
+
+      canvas.viewbox({
+        x: 0,
+        y: 0,
+        width: Infinity,
+        height: Infinity
+      });
+    });
+
   });
 
 });
