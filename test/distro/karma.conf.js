@@ -25,15 +25,14 @@ module.exports = function(karma) {
   karma.set({
 
     frameworks: [
-      'browserify',
       'mocha',
       'sinon-chai'
     ],
 
-    files: [ './diagram-js-minimap.js' ],
+    files: [ '*Spec.js' ],
 
     preprocessors: {
-      './diagram-js-minimap.js': [ 'browserify' ]
+      '*Spec.js': [ 'webpack' ]
     },
 
     reporters: [ 'spec' ],
@@ -54,17 +53,8 @@ module.exports = function(karma) {
     autoWatch: false,
     singleRun: true,
 
-    browserify: {
-      debug: true,
-      transform: [
-        [ 'babelify', {
-          global: true
-        }],
-        [ 'stringify', {
-          global: true,
-          extensions: [ '.css' ]
-        }]
-      ]
+    webpack: {
+      mode: 'development'
     }
   });
 };
