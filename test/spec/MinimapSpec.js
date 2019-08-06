@@ -13,7 +13,7 @@ import {
   getDiagramJS
 } from '../TestHelper';
 
-import minimapModule from '../../';
+import minimapModule from '../../lib';
 
 import moveCanvasModule from 'diagram-js/lib/navigation/movecanvas';
 import zoomScrollModule from 'diagram-js/lib/navigation/zoomscroll';
