@@ -21,7 +21,6 @@ var browsers =
       return browser;
     });
 
-
 module.exports = function(karma) {
   karma.set({
 
@@ -31,9 +30,7 @@ module.exports = function(karma) {
       'sinon-chai'
     ],
 
-    files: [
-      'test/**/*Spec.js'
-    ],
+    files: [ 'test/**/*Spec.js' ],
 
     preprocessors: {
       'test/**/*Spec.js': [ 'browserify' ]
@@ -57,15 +54,16 @@ module.exports = function(karma) {
     autoWatch: false,
     singleRun: true,
 
-    // browserify configuration
     browserify: {
       debug: true,
       transform: [
-        [ 'babelify', { global: true } ],
+        [ 'babelify', {
+          global: true
+        }],
         [ 'stringify', {
           global: true,
           extensions: [ '.css' ]
-        } ]
+        }]
       ]
     }
   });

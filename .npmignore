@@ -1,5 +1,7 @@
 resources/
 test/
+!dist
 .eslintrc
 karma.conf.js
 .travis.yml
+rollup.config.js
