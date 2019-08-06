@@ -6,6 +6,16 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+## 2.0.0
+
+* `CHORE`: provide pre-packaged distribution
+* `CHORE`: bump to `diagram-js@4`
+* `FIX`: only update viewbox on valid bounds
+
+## 1.3.0
+
+* `CHORE`: bump to `diagram-js@3`
+
 ## 1.2.2
 
 __Republish with updated changelog.__
