@@ -1,6 +1,6 @@
 {
   "name": "diagram-js-minimap",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A minimap for diagram-js",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
