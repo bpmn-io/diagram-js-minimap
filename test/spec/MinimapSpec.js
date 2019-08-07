@@ -186,10 +186,58 @@ describe('minimap', function() {
       canvas.viewbox({
         x: 0,
         y: 0,
+        width: 100,
+        height: 100
+      });
+    });
+
+
+    it('should not error on viewbox changed (malformed values)', function() {
+      var diagram = new Diagram({
+        modules: modelerModules
+      });
+
+      var canvas = diagram.get('canvas');
+
+      canvas.viewbox({
+        x: 0,
+        y: 0,
         width: Infinity,
         height: Infinity
       });
     });
+
+  });
+
+
+  describe('mousemove', function() {
+
+    beforeEach(bootstrapDiagram({
+      modules: viewerModules,
+      minimap: {
+        open: true
+      }
+    }));
+
+    it('should change viewbox on mousemove', inject(function(eventBus, minimap) {
+
+      // given
+      var svg = minimap._svg;
+
+      var listener = sinon.spy();
+
+      eventBus.on('canvas.viewbox.changing', listener);
+
+      // when
+      triggerMouseEvent('mousedown', svg);
+      triggerMouseEvent('mousemove', svg);
+      triggerMouseEvent('mousemove', svg);
+
+      // then
+      // 1 mousedown + 2 mousemove
+      expect(listener).to.have.been.calledThrice;
+
+    }));
 
   });
 
@@ -219,7 +267,15 @@ function generateShapes(count, viewport) {
   });
 }
 
-
 function rnd(start, end) {
   return Math.round(Math.random() * (end - start) + start);
 }
+
+function triggerMouseEvent(type, gfx) {
+
+  var event = document.createEvent('MouseEvent');
+  event.initMouseEvent(type, true, true, window, 0, 0, 0, 80, 20, false, false, false, false, 0, null);
+
+  return gfx.dispatchEvent(event);
+}
+
