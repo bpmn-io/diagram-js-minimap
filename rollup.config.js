@@ -13,6 +13,7 @@ function pgl(plugins=[]) {
 }
 
 export default [
+
   // browser-friendly UMD build
   {
     input: srcEntry,
