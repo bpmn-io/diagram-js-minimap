@@ -23,8 +23,6 @@ module.exports = function(karma) {
       'test/spec/*Spec.js': [ 'webpack' ]
     },
 
-    reporters: [ 'spec' ],
-
     browsers,
 
     autoWatch: false,
