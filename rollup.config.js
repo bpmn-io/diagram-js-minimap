@@ -47,6 +47,7 @@ export default [
       { file: pkg.module, format: 'es' }
     ],
     external: [
+      'diagram-js/lib/util/GraphicsUtil',
       'css.escape',
       'min-dash',
       'min-dom',
