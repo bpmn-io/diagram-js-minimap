@@ -1,6 +1,6 @@
 # diagram-js Minimap
 
-[![Build Status](https://travis-ci.org/bpmn-io/diagram-js-minimap.svg?branch=master)](https://travis-ci.org/bpmn-io/diagram-js-minimap)
+[![Build Status](https://travis-ci.com/bpmn-io/diagram-js-minimap.svg?branch=master)](https://travis-ci.com/bpmn-io/diagram-js-minimap)
 
 A minimap for diagram-js.
 
