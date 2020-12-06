@@ -31,14 +31,13 @@
 }
 
 .djs-minimap:not(.open) .toggle {
-  width: 46px;
-  height: 46px;
-  line-height: 46px;
+  padding: 10px;
   text-align: center;
 }
 
-.djs-minimap:not(.open) .toggle:before {
-  content: 'Open';
+.djs-minimap:not(.open) .toggle:before,
+.djs-minimap.open .toggle:before {
+  content: attr(title);
 }
 
 .djs-minimap.open .toggle {
@@ -46,10 +45,6 @@
   right: 0;
   padding: 6px;
   z-index: 1;
-}
-
-.djs-minimap.open .toggle:before {
-  content: 'Close';
 }
 
 .djs-minimap .map {
