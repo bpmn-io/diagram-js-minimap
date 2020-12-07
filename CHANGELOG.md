@@ -6,6 +6,18 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+## 2.0.4
+
+* `FIX`: translate toggle button content ([#43](https://github.com/bpmn-io/diagram-js-minimap/issues/43))
+
+## 2.0.3
+
+Re-released `v2.0.2`.
+
+## 2.0.2
+
+* `FIX`: do not log graphics not found ([#38](https://github.com/bpmn-io/diagram-js-minimap/issues/38))
+
 ## 2.0.1
 
 * `FIX`: prevent minimap from crashing on mouse move ([#36](https://github.com/bpmn-io/diagram-js-minimap/issues/36))
