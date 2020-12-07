@@ -35,8 +35,7 @@
   text-align: center;
 }
 
-.djs-minimap:not(.open) .toggle:before,
-.djs-minimap.open .toggle:before {
+.djs-minimap .toggle:before {
   content: attr(title);
 }
 
