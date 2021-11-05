@@ -89,9 +89,9 @@ describe('minimap', function() {
       canvas.addShape(shapeC, canvas.getRootElement());
 
       // then
-      expectMinimapShape('A');
-      expectMinimapShape('B');
-      expectMinimapShape('C');
+      expectMinimapShapeToExist('A');
+      expectMinimapShapeToExist('B');
+      expectMinimapShapeToExist('C');
     }));
 
 
@@ -109,7 +109,7 @@ describe('minimap', function() {
       canvas.addShape(shapeA, canvas.getRootElement());
 
       // then
-      expectMinimapShape('A');
+      expectMinimapShapeToExist('A');
     }));
 
   });
@@ -162,11 +162,11 @@ describe('minimap', function() {
       });
 
       // then
-      expectMinimapShape('A');
-      expectMinimapShape('B');
-      expectMinimapShape('C');
+      expectMinimapShapeToExist('A');
+      expectMinimapShapeToExist('B');
+      expectMinimapShapeToExist('C');
 
-      expectMinimapShapes(shapes);
+      expectMinimapShapesToExist(shapes);
     }));
 
 
@@ -194,15 +194,15 @@ describe('minimap', function() {
 
       modeling.createElements([ parent, child ], { x: 100, y: 100 }, rootElement);
 
-      expectMinimapShape('parent');
-      expectMinimapShape('child');
+      expectMinimapShapeToExist('parent');
+      expectMinimapShapeToExist('child');
 
       // when
       modeling.resizeShape(parent, { x: 50, y: 50, width: 200, height: 100 });
 
       // then
-      expectMinimapShape('parent');
-      expectMinimapShape('child');
+      expectMinimapShapeToExist('parent');
+      expectMinimapShapeToExist('child');
     }));
 
   });
@@ -303,6 +303,61 @@ describe('minimap', function() {
 
   });
 
+
+  describe('planes', function() {
+    beforeEach(bootstrapDiagram({
+      modules: viewerModules,
+      minimap: {
+        open: true
+      }
+    }));
+
+    it('should only show elements of active plane', inject(function(canvas, elementFactory) {
+
+      // given
+      var rootA = elementFactory.createRoot({
+        id: 'rootA'
+      });
+      var shapeA = elementFactory.createShape({
+        id: 'A',
+        width: 100,
+        height: 300,
+        x: 50,
+        y: 150
+      });
+
+      canvas.createPlane('A', rootA);
+      canvas.addShape(shapeA, rootA);
+
+      var rootB = elementFactory.createRoot({
+        id: 'rootB'
+      });
+      var shapeB = elementFactory.createShape({
+        id: 'B',
+        width: 100,
+        height: 300,
+        x: 50,
+        y: 150
+      });
+
+      canvas.createPlane('B', rootB);
+      canvas.addShape(shapeB, rootB);
+      canvas.setActivePlane('A');
+
+      // assume
+      expectMinimapShapeToExist('A');
+      expectMinimapShapeToNotExist('B');
+
+      // when
+      canvas.setActivePlane('B');
+
+      // then
+      expectMinimapShapeToNotExist('A');
+      expectMinimapShapeToExist('B');
+    }));
+
+  });
+
 });
 
 
@@ -345,7 +400,7 @@ function triggerMouseEvent(type, gfx) {
   return gfx.dispatchEvent(event);
 }
 
-function expectMinimapShape(id) {
+function expectMinimapShapeToExist(id) {
   getDiagramJS().invoke(function(elementRegistry, minimap) {
     var element = elementRegistry.get(id);
 
@@ -370,10 +425,22 @@ function expectMinimapShape(id) {
   });
 }
 
-function expectMinimapShapes(shapes) {
+function expectMinimapShapeToNotExist(id) {
+  getDiagramJS().invoke(function(elementRegistry, minimap) {
+    var element = elementRegistry.get(id);
+
+    expect(element).to.exist;
+
+    var minimapShape = domQuery('g#' + id, minimap._parent);
+
+    expect(minimapShape).to.not.exist;
+  });
+}
+
+function expectMinimapShapesToExist(shapes) {
   shapes.forEach(function(shape) {
     var id = shape.id;
 
-    expectMinimapShape(id);
+    expectMinimapShapeToExist(id);
   });
 }
