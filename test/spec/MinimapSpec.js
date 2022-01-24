@@ -326,7 +326,7 @@ describe('minimap', function() {
         y: 150
       });
 
-      canvas.createPlane('A', rootA);
+      canvas.addRootElement(rootA);
       canvas.addShape(shapeA, rootA);
 
       var rootB = elementFactory.createRoot({
@@ -340,16 +340,16 @@ describe('minimap', function() {
         y: 150
       });
 
-      canvas.createPlane('B', rootB);
+      canvas.addRootElement(rootB);
       canvas.addShape(shapeB, rootB);
-      canvas.setActivePlane('A');
+      canvas.setRootElement(rootA);
 
       // assume
       expectMinimapShapeToExist('A');
       expectMinimapShapeToNotExist('B');
 
       // when
-      canvas.setActivePlane('B');
+      canvas.setRootElement(rootB);
 
       // then
       expectMinimapShapeToNotExist('A');
