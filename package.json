@@ -14,7 +14,8 @@
     "distro": "run-s build test:build",
     "build": "rollup -c",
     "test:build": "karma start test/distro/karma.conf.js",
-    "prepublishOnly": "run-s distro"
+    "prepublishOnly": "run-s distro",
+    "prepare": "run-s distro"
   },
   "repository": {
     "type": "git",
