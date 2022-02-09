@@ -6,6 +6,11 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+## 2.1.0
+
+* `FEAT`: support multi-plane diagrams ([#46](https://github.com/bpmn-io/diagram-js-minimap/pull/46)),
+* `DEPS`: bump `diagram-js` to 8.1.1
+
 ## 2.0.4
 
 * `FIX`: translate toggle button content ([#43](https://github.com/bpmn-io/diagram-js-minimap/issues/43))
