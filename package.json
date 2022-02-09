@@ -32,7 +32,7 @@
   "homepage": "https://github.com/bpmn-io/diagram-js-minimap#readme",
   "devDependencies": {
     "chai": "^4.2.0",
-    "diagram-js": "^8.0.2",
+    "diagram-js": "^8.1.1",
     "eslint": "^6.5.0",
     "eslint-plugin-bpmn-io": "^0.10.0",
     "karma": "^4.3.0",
