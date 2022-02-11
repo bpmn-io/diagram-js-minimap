@@ -12,7 +12,8 @@ import {
   bootstrapDiagram,
   getDiagramJS,
   inject,
-  insertCSS
+  insertCSS,
+  withDiagramJs
 } from '../TestHelper';
 
 import minimapModule from '../../lib';
@@ -312,49 +313,96 @@ describe('minimap', function() {
       }
     }));
 
-    it('should only show elements of active plane', inject(function(canvas, elementFactory) {
+    withDiagramJs('>=8')('should only show elements of active plane',
+      inject(function(canvas, elementFactory) {
 
-      // given
-      var rootA = elementFactory.createRoot({
-        id: 'rootA'
-      });
-      var shapeA = elementFactory.createShape({
-        id: 'A',
-        width: 100,
-        height: 300,
-        x: 50,
-        y: 150
-      });
+        // given
+        var rootA = elementFactory.createRoot({
+          id: 'rootA'
+        });
+        var shapeA = elementFactory.createShape({
+          id: 'A',
+          width: 100,
+          height: 300,
+          x: 50,
+          y: 150
+        });
 
-      canvas.addRootElement(rootA);
-      canvas.addShape(shapeA, rootA);
+        canvas.addRootElement(rootA);
+        canvas.addShape(shapeA, rootA);
 
-      var rootB = elementFactory.createRoot({
-        id: 'rootB'
-      });
-      var shapeB = elementFactory.createShape({
-        id: 'B',
-        width: 100,
-        height: 300,
-        x: 50,
-        y: 150
-      });
+        var rootB = elementFactory.createRoot({
+          id: 'rootB'
+        });
+        var shapeB = elementFactory.createShape({
+          id: 'B',
+          width: 100,
+          height: 300,
+          x: 50,
+          y: 150
+        });
 
-      canvas.addRootElement(rootB);
-      canvas.addShape(shapeB, rootB);
-      canvas.setRootElement(rootA);
+        canvas.addRootElement(rootB);
+        canvas.addShape(shapeB, rootB);
+        canvas.setRootElement(rootA);
 
-      // assume
-      expectMinimapShapeToExist('A');
-      expectMinimapShapeToNotExist('B');
+        // assume
+        expectMinimapShapeToExist('A');
+        expectMinimapShapeToNotExist('B');
 
-      // when
-      canvas.setRootElement(rootB);
+        // when
+        canvas.setRootElement(rootB);
 
-      // then
-      expectMinimapShapeToNotExist('A');
-      expectMinimapShapeToExist('B');
-    }));
+        // then
+        expectMinimapShapeToNotExist('A');
+        expectMinimapShapeToExist('B');
+      }));
+
+
+    withDiagramJs('^7.4')('should only show elements of active plane',
+      inject(function(canvas, elementFactory) {
+
+        // given
+        var rootA = elementFactory.createRoot({
+          id: 'rootA'
+        });
+        var shapeA = elementFactory.createShape({
+          id: 'A',
+          width: 100,
+          height: 300,
+          x: 50,
+          y: 150
+        });
+
+        canvas.createPlane('A', rootA);
+        canvas.addShape(shapeA, rootA);
+
+        var rootB = elementFactory.createRoot({
+          id: 'rootB'
+        });
+        var shapeB = elementFactory.createShape({
+          id: 'B',
+          width: 100,
+          height: 300,
+          x: 50,
+          y: 150
+        });
+
+        canvas.createPlane('B', rootB);
+        canvas.addShape(shapeB, rootB);
+        canvas.setActivePlane('A');
+
+        // assume
+        expectMinimapShapeToExist('A');
+        expectMinimapShapeToNotExist('B');
+
+        // when
+        canvas.setActivePlane('B');
+
+        // then
+        expectMinimapShapeToNotExist('A');
+        expectMinimapShapeToExist('B');
+      }));
 
   });
 
