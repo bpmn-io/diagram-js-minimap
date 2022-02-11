@@ -6,6 +6,10 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+## 2.1.1
+
+* `FIX`: ensure backwards compatibility with `diagram-js@7`
+
 ## 2.1.0
 
 * `FEAT`: support multi-plane diagrams ([#46](https://github.com/bpmn-io/diagram-js-minimap/pull/46)),
