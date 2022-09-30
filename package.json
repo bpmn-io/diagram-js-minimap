@@ -30,7 +30,7 @@
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^14.1.0",
     "chai": "^4.3.6",
-    "diagram-js": "^8.1.1",
+    "diagram-js": "^9.1.0",
     "eslint": "^8.24.0",
     "eslint-plugin-bpmn-io": "^0.16.0",
     "karma": "^6.4.1",
@@ -51,9 +51,9 @@
   },
   "dependencies": {
     "css.escape": "^1.5.1",
-    "min-dash": "^3.5.2",
-    "min-dom": "^3.1.1",
-    "tiny-svg": "^2.2.2"
+    "min-dash": "^4.0.0",
+    "min-dom": "^4.0.2",
+    "tiny-svg": "^3.0.0"
   },
   "files": [
     "dist",
