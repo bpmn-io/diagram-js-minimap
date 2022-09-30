@@ -8,7 +8,7 @@ const srcEntry = pkg.source;
 const umdDist = pkg[ 'umd:main' ];
 const umdName = 'DiagramJSMinimap';
 
-function pgl(plugins=[]) {
+function pgl(plugins = []) {
   return plugins;
 }
 
