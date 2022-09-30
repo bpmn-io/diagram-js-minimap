@@ -56,5 +56,9 @@
     "min-dash": "^3.5.2",
     "min-dom": "^3.1.1",
     "tiny-svg": "^2.2.2"
-  }
+  },
+  "files": [
+    "dist",
+    "assets"
+  ]
 }
