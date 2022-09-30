@@ -1,9 +1,0 @@
-resources/
-test/
-!dist
-lib/
-.eslintignore
-.eslintrc
-karma.conf.js
-.travis.yml
-rollup.config.js
