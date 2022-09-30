@@ -6,6 +6,10 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.0.0
+
+* `DEPS`: update to diagram-js@9
+
 ## 2.1.1
 
 * `FIX`: ensure backwards compatibility with `diagram-js@7`
