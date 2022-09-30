@@ -5,7 +5,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [14]
+        node-version: [ 16 ]
         integration-deps:
           - "" # as defined in package.json
           - diagram-js@7.x
