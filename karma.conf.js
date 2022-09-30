@@ -3,8 +3,8 @@
 'use strict';
 
 // configures browsers to run test against
-// any of [ 'ChromeHeadless', 'Chrome', 'Firefox', 'IE', 'PhantomJS' ]
-var browsers = (process.env.TEST_BROWSERS || 'PhantomJS').split(',');
+// any of [ 'ChromeHeadless', 'Chrome', 'Firefox' ]
+var browsers = (process.env.TEST_BROWSERS || 'ChromeHeadless').split(',');
 
 // use puppeteer provided Chrome for testing
 process.env.CHROME_BIN = require('puppeteer').executablePath();
@@ -14,7 +14,8 @@ module.exports = function(karma) {
 
     frameworks: [
       'mocha',
-      'sinon-chai'
+      'sinon-chai',
+      'webpack'
     ],
 
     files: [
@@ -36,7 +37,7 @@ module.exports = function(karma) {
         rules: [
           {
             test: /\.css$/,
-            use: 'raw-loader'
+            type: 'asset/source'
           }
         ]
       }
