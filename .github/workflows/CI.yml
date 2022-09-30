@@ -8,8 +8,8 @@ jobs:
         node-version: [ 16 ]
         integration-deps:
           - "" # as defined in package.json
+          - diagram-js@8.x
           - diagram-js@7.x
-          - diagram-js@6.x
 
     runs-on: ${{ matrix.os }}
 
