@@ -13,6 +13,7 @@
     "test": "karma start",
     "distro": "run-s build test:build",
     "build": "rollup -c",
+    "build:watch": "rollup -c -w",
     "test:build": "karma start test/distro/karma.conf.js",
     "prepublishOnly": "run-s distro"
   },
