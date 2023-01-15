@@ -34,6 +34,7 @@
     "diagram-js": "^9.1.0",
     "eslint": "^8.24.0",
     "eslint-plugin-bpmn-io": "^0.16.0",
+    "hammerjs": "^2.0.8",
     "karma": "^6.4.1",
     "karma-chrome-launcher": "^3.1.1",
     "karma-firefox-launcher": "^2.1.2",
@@ -55,6 +56,9 @@
     "min-dash": "^4.0.0",
     "min-dom": "^4.0.2",
     "tiny-svg": "^3.0.0"
+  },
+  "peerDependencies": {
+    "hammerjs": "^2.0.0"
   },
   "files": [
     "dist",
