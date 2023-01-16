@@ -6,6 +6,11 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+# 4.0.0
+
+* `FEAT`: minimap works with touch ([#54](https://github.com/bpmn-io/diagram-js-minimap/pull/54))
+* `DEPS`: add `hammerjs` peer dependency
+
 ## 3.0.0
 
 * `DEPS`: update to diagram-js@9
