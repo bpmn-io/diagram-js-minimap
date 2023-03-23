@@ -6,6 +6,12 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+# 4.1.0
+
+* `CHORE`: bump dependencies
+* `CHORE`: bump rollup
+* `CHORE`: use diagram-js facilities for CSS escaping
+
 # 4.0.1
 
 * `DEPS`: make `hammerjs` regular dependency
