@@ -49,6 +49,7 @@ export default [
     external: [
       'diagram-js/lib/util/GraphicsUtil',
       'diagram-js/lib/util/EscapeUtil',
+      'hammerjs',
       'min-dash',
       'min-dom',
       'tiny-svg'
