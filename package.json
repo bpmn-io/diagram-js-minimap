@@ -12,8 +12,8 @@
     "dev": "npm test -- --auto-watch --no-single-run",
     "test": "karma start",
     "distro": "run-s build test:build",
-    "build": "rollup -c",
-    "build:watch": "rollup -c -w",
+    "build": "rollup -c --bundleConfigAsCjs",
+    "build:watch": "run-s bundle -- -w",
     "test:build": "karma start test/distro/karma.conf.js",
     "prepublishOnly": "run-s distro"
   },
@@ -28,8 +28,9 @@
   "author": "Philipp Fromme",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^22.0.2",
-    "@rollup/plugin-node-resolve": "^14.1.0",
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-terser": "^0.4.0",
     "chai": "^4.3.6",
     "diagram-js": "^11.11.0",
     "eslint": "^8.36.0",
@@ -44,8 +45,7 @@
     "mocha-test-container-support": "^0.2.0",
     "npm-run-all": "^4.1.5",
     "puppeteer": "^18.0.5",
-    "rollup": "^2.79.1",
-    "rollup-plugin-terser": "^7.0.2",
+    "rollup": "^3.20.0",
     "sinon": "^14.0.0",
     "sinon-chai": "^3.7.0",
     "webpack": "^5.74.0"
