@@ -48,7 +48,7 @@ export default [
     ],
     external: [
       'diagram-js/lib/util/GraphicsUtil',
-      'css.escape',
+      'diagram-js/lib/util/EscapeUtil',
       'min-dash',
       'min-dom',
       'tiny-svg'
