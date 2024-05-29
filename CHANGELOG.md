@@ -6,6 +6,13 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+* `CHORE`: drop hammerjs dependency ([#73](https://github.com/bpmn-io/diagram-js-minimap/issues/73))
+
+
+### Breaking Change
+
+* Following [`diagram-js@14`](https://github.com/bpmn-io/diagram-js/blob/develop/CHANGELOG.md#1400) this release drops hammerjs and broken touch support.
+
 # 4.1.0
 
 * `CHORE`: bump dependencies
