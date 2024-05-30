@@ -508,7 +508,7 @@ function expectMinimapShapeToExist(id) {
 
     expect(element).to.exist;
 
-    var minimapShape = domQuery('g#djs-minimap-' + id, minimap._parent);
+    var minimapShape = domQuery(`g[id^="djs-minimap-${id}"]`, minimap._parent);
 
     expect(minimapShape).to.exist;
 
@@ -533,7 +533,7 @@ function expectMinimapConnectionToExist(id) {
 
     expect(element).to.exist;
 
-    var minimapShape = domQuery('g#djs-minimap-' + id, minimap._parent);
+    var minimapShape = domQuery(`g[id^="djs-minimap-${id}"]`, minimap._parent);
 
     expect(minimapShape).to.exist;
   });
