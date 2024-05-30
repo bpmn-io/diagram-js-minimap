@@ -6,11 +6,13 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+## 5.1.0
+
 * `FEAT`: support multiple diagram-js-instances on the same page
 * `FIX`: do not copy elements with IDs
 * `CHORE`: prefix svg graphic IDs
 
-### 5.0.0
+## 5.0.0
 
 * `CHORE`: drop hammerjs dependency ([#73](https://github.com/bpmn-io/diagram-js-minimap/issues/73))
 
