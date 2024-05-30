@@ -3,7 +3,8 @@
 import {
   attr as svgAttr,
   remove as domRemove,
-  query as domQuery
+  query as domQuery,
+  queryAll as domQueryAll
 } from 'min-dom';
 
 import Diagram from 'diagram-js';
@@ -17,6 +18,7 @@ import {
 } from '../TestHelper';
 
 import minimapModule from '../../lib';
+import customRendererModule from './marker-renderer';
 
 import modelingModule from 'diagram-js/lib/features/modeling';
 import moveCanvasModule from 'diagram-js/lib/navigation/movecanvas';
@@ -30,7 +32,8 @@ insertCSS('diagram-js-minimap.css', minimapCSS);
 var viewerModules = [
   minimapModule,
   moveCanvasModule,
-  zoomScrollModule
+  zoomScrollModule,
+  customRendererModule
 ];
 
 var modelerModules = viewerModules.concat([
@@ -111,6 +114,57 @@ describe('minimap', function() {
 
       // then
       expectMinimapShapeToExist('A');
+    }));
+
+
+    it('should remove elements with ID', inject(function(canvas, elementFactory, minimap) {
+
+      // when
+      var shapeA = elementFactory.createShape({
+        id: 'A',
+        width: 100,
+        height: 300,
+        x: 50,
+        y: 150
+      });
+      canvas.addShape(shapeA, canvas.getRootElement());
+
+      var shapeB = elementFactory.createShape({
+        id: 'B',
+        width: 50,
+        height: 50,
+        x: 775,
+        y: 1175
+      });
+
+      canvas.addShape(shapeB, canvas.getRootElement());
+
+      var connection = elementFactory.createConnection({
+        id: 'connection',
+        source: shapeA,
+        target: shapeB,
+        waypoints: [
+          { x: 900, y: 900 },
+          { x: 1000, y: 1000 },
+          { x: 1100, y: 1100 }
+        ],
+        marker: {
+          start: true,
+          mid: true,
+          end: true
+        }
+      });
+
+      canvas.addConnection(connection, canvas.getRootElement());
+
+      // then
+      expectMinimapConnectionToExist('connection');
+
+      const elementsWithId = domQueryAll('marker[id]', canvas._svg);
+      expect(elementsWithId).to.have.length(3);
+
+      const minimapElementsWithId = domQueryAll('marker[id]', minimap._parent);
+      expect(minimapElementsWithId).to.have.length(0);
     }));
 
   });
@@ -472,6 +526,19 @@ function expectMinimapShapeToExist(id) {
     expect(y).to.equal(element.y - parentY);
   });
 }
+
+function expectMinimapConnectionToExist(id) {
+  getDiagramJS().invoke(function(elementRegistry, minimap) {
+    var element = elementRegistry.get(id);
+
+    expect(element).to.exist;
+
+    var minimapShape = domQuery('g#djs-minimap-' + id, minimap._parent);
+
+    expect(minimapShape).to.exist;
+  });
+}
+
 
 function expectMinimapShapeToNotExist(id) {
   getDiagramJS().invoke(function(elementRegistry, minimap) {

@@ -35,6 +35,7 @@
     "diagram-js": "^14.7.1",
     "eslint": "^8.56.0",
     "eslint-plugin-bpmn-io": "^1.0.0",
+    "inherits-browser": "^0.1.0",
     "karma": "^6.4.3",
     "karma-chrome-launcher": "^3.2.0",
     "karma-firefox-launcher": "^2.1.3",
