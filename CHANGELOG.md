@@ -6,6 +6,8 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+### 5.0.0
+
 * `CHORE`: drop hammerjs dependency ([#73](https://github.com/bpmn-io/diagram-js-minimap/issues/73))
 
 ### Breaking Change
