@@ -47,8 +47,8 @@ export default [
       { file: pkg.module, format: 'es', exports: 'default' }
     ],
     external: [
-      'diagram-js/lib/util/GraphicsUtil',
-      'diagram-js/lib/util/EscapeUtil',
+      'diagram-js',
+      /diagram-js(\/[\w-]+)+/,
       'hammerjs',
       'min-dash',
       'min-dom',
