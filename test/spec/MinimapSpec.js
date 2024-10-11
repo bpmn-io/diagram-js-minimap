@@ -1,5 +1,3 @@
-/* global sinon */
-
 import {
   attr as svgAttr,
   remove as domRemove,
