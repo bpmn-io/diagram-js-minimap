@@ -6,6 +6,10 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+## 5.2.0
+
+* `FEAT`: support `diagram-js@15.1.0`
+
 ## 5.1.0
 
 * `FEAT`: support multiple diagram-js-instances on the same page
