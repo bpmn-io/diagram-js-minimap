@@ -1,3 +1,5 @@
+import '../globals';
+
 import {
   attr as svgAttr,
   remove as domRemove,
@@ -14,6 +16,9 @@ import {
   insertCSS,
   withDiagramJs
 } from '../TestHelper';
+
+import { expect } from 'chai';
+import { spy } from 'sinon';
 
 import minimapModule from '../../lib';
 import customRendererModule from './marker-renderer';
@@ -275,7 +280,7 @@ describe('minimap', function() {
       function(canvas, eventBus, minimap) {
 
         // given
-        var spy = sinon.spy(minimap, '_update');
+        var updateSpy = spy(minimap, '_update');
 
         // when
         domRemove(canvas.getContainer());
@@ -283,7 +288,7 @@ describe('minimap', function() {
         eventBus.fire('canvas.resized');
 
         // then
-        expect(spy).to.not.have.been.called;
+        expect(updateSpy).to.not.have.been.called;
       }
     ));
   });
@@ -339,7 +344,7 @@ describe('minimap', function() {
       // given
       var svg = minimap._svg;
 
-      var listener = sinon.spy();
+      var listener = spy();
 
       eventBus.on('canvas.viewbox.changing', listener);
 
