@@ -14,7 +14,6 @@ module.exports = function(karma) {
 
     frameworks: [
       'mocha',
-      'sinon-chai',
       'webpack'
     ],
 
@@ -35,6 +34,10 @@ module.exports = function(karma) {
       mode: 'development',
       module: {
         rules: [
+          {
+            test: /test\/globals\.js$/,
+            sideEffects: true
+          },
           {
             test: /\.css$/,
             type: 'asset/source'
