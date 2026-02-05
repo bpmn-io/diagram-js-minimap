@@ -53,7 +53,7 @@
   "dependencies": {
     "min-dash": "^5.0.0",
     "min-dom": "^5.2.0",
-    "tiny-svg": "^3.1.2"
+    "tiny-svg": "^4.1.4"
   },
   "files": [
     "dist",
