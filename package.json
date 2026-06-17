@@ -45,6 +45,7 @@
     "mocha-test-container-support": "^0.2.0",
     "npm-run-all2": "^9.0.0",
     "rollup": "^4.54.0",
+    "semver": "^7.8.4",
     "sinon": "^22.0.0",
     "sinon-chai": "^4.0.0",
     "webpack": "^5.104.1"
