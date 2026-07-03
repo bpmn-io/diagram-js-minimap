@@ -39,6 +39,30 @@ For proper styling integrate the embedded style sheet:
 Please see [this example](https://github.com/bpmn-io/bpmn-js-examples/tree/master/minimap) for a more detailed instruction.
 
 
+## Configuration
+
+The minimap can be configured via the `minimap` configuration option:
+
+```javascript
+var bpmnModeler = new BpmnModeler({
+  additionalModules: [
+    minimapModule
+  ],
+  minimap: {
+    open: true,             // open the minimap by default (default: false)
+    debounceDelay: 100,     // batch element updates within this delay, in ms (default: 100)
+    debounceSkipDelay: 2000 // force a refresh at least every this delay, in ms (default: 2000)
+  }
+});
+```
+
+To keep modeling responsive on large diagrams, the minimap batches (debounces)
+element additions, removals and changes into a single update, and does not
+update at all while it is closed. It rebuilds from the active root the next time
+it is opened. User interactions (drag, zoom, click) and viewport changes always
+update immediately.
+
+
 ## License
 
 MIT
