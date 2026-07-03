@@ -6,6 +6,8 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+* `DEPS`: update to `min-dom@5.3.0`
+
 ## 5.3.0
 
 * `DEPS`: update to `min-dom@5.2.0`
