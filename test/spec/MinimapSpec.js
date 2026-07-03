@@ -47,7 +47,7 @@ var modelerModules = viewerModules.concat([
 
 describe('minimap', function() {
 
-  this.timeout(20000);
+  this.timeout(5000);
 
 
   describe('viewer', function() {
