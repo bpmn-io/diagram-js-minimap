@@ -28,7 +28,7 @@
   "author": "Philipp Fromme",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-commonjs": "^29.0.3",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^1.0.0",
     "chai": "^6.2.2",
@@ -45,7 +45,7 @@
     "mocha": "^11.0.0",
     "mocha-test-container-support": "^0.2.0",
     "npm-run-all2": "^9.0.0",
-    "rollup": "^4.54.0",
+    "rollup": "^4.62.2",
     "semver": "^7.8.4",
     "sinon": "^22.0.0",
     "sinon-chai": "^4.0.0",
