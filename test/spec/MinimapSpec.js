@@ -266,6 +266,102 @@ describe('minimap', function() {
   });
 
 
+  describe('hidden elements', function() {
+
+    beforeEach(bootstrapDiagram({
+      modules: modelerModules,
+      minimap: {
+        open: true
+      }
+    }));
+
+
+    it('should not show hidden element', inject(
+      function(canvas, elementFactory) {
+
+        // given
+        var parent = elementFactory.createShape({
+          id: 'parent', width: 300, height: 300, x: 0, y: 0
+        });
+
+        canvas.addShape(parent, canvas.getRootElement());
+
+        // when adding a hidden child (e.g. child of a collapsed shape)
+        var child = elementFactory.createShape({
+          id: 'child', width: 50, height: 50, x: 20, y: 20, hidden: true
+        });
+
+        canvas.addShape(child, parent);
+
+        // then
+        expectMinimapShapeToExist('parent');
+        expectMinimapShapeToNotExist('child');
+      }
+    ));
+
+
+    it('should hide element when it becomes hidden (collapse)', inject(
+      function(canvas, elementFactory, eventBus) {
+
+        // given
+        var parent = elementFactory.createShape({
+          id: 'parent', width: 300, height: 300, x: 0, y: 0
+        });
+
+        canvas.addShape(parent, canvas.getRootElement());
+
+        var child = elementFactory.createShape({
+          id: 'child', width: 50, height: 50, x: 20, y: 20
+        });
+
+        canvas.addShape(child, parent);
+
+        // assume
+        expectMinimapShapeToExist('child');
+
+        // when collapsing the parent hides its children
+        child.hidden = true;
+
+        eventBus.fire('elements.changed', { elements: [ parent, child ] });
+
+        // then
+        expectMinimapShapeToNotExist('child');
+      }
+    ));
+
+
+    it('should show element again when it becomes visible (expand)', inject(
+      function(canvas, elementFactory, eventBus) {
+
+        // given
+        var parent = elementFactory.createShape({
+          id: 'parent', width: 300, height: 300, x: 0, y: 0
+        });
+
+        canvas.addShape(parent, canvas.getRootElement());
+
+        var child = elementFactory.createShape({
+          id: 'child', width: 50, height: 50, x: 20, y: 20, hidden: true
+        });
+
+        canvas.addShape(child, parent);
+
+        // assume
+        expectMinimapShapeToNotExist('child');
+
+        // when expanding the parent shows its children again
+        child.hidden = false;
+
+        eventBus.fire('elements.changed', { elements: [ parent, child ] });
+
+        // then
+        expectMinimapShapeToExist('child');
+      }
+    ));
+
+  });
+
+
   describe('canvas.resized', function() {
 
     beforeEach(bootstrapDiagram({
@@ -549,7 +645,7 @@ function expectMinimapShapeToNotExist(id) {
 
     expect(element).to.exist;
 
-    var minimapShape = domQuery('g#' + id, minimap._parent);
+    var minimapShape = domQuery(`g[id^="djs-minimap-${id}-"]`, minimap._parent);
 
     expect(minimapShape).to.not.exist;
   });
