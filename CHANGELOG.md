@@ -6,6 +6,11 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+## 5.4.0
+
+* `FEAT`: improve render and performance ([#96](https://github.com/bpmn-io/diagram-js-minimap/issues/96), [#81](https://github.com/bpmn-io/diagram-js-minimap/issues/81), [#115](https://github.com/bpmn-io/diagram-js-minimap/pull/115))
+* `FEAT`: do not update unless shown ([#115](https://github.com/bpmn-io/diagram-js-minimap/pull/115))
+* `FIX`: do not render hidden element children ([#56](https://github.com/bpmn-io/diagram-js-minimap/issues/56), [#116](https://github.com/bpmn-io/diagram-js-minimap/pull/116))
 * `DEPS`: update to `min-dom@5.3.0`
 
 ## 5.3.0
