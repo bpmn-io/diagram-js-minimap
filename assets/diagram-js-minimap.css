@@ -2,6 +2,7 @@
   position: absolute;
   top: 20px;
   right: 20px;
+  z-index: 175; /* keep minimap above canvas overlays (e.g. context pads) but below popup menus */
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.9);
   border: solid 1px #CCC;
