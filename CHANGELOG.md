@@ -6,6 +6,8 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FIX`: set an explicit z-index on the minimap ([#118](https://github.com/bpmn-io/diagram-js-minimap/pull/118))
+
 ## 5.4.0
 
 * `FEAT`: improve render and performance ([#96](https://github.com/bpmn-io/diagram-js-minimap/issues/96), [#81](https://github.com/bpmn-io/diagram-js-minimap/issues/81), [#115](https://github.com/bpmn-io/diagram-js-minimap/pull/115))
