@@ -56,12 +56,6 @@ var bpmnModeler = new BpmnModeler({
 });
 ```
 
-To keep modeling responsive on large diagrams, the minimap batches (debounces)
-element additions, removals and changes into a single update, and does not
-update at all while it is closed. It rebuilds from the active root the next time
-it is opened. User interactions (drag, zoom, click) and viewport changes always
-update immediately.
-
 
 ## License
 
