@@ -12,7 +12,7 @@ A minimap for diagram-js.
 * See the whole diagram in the minimap
 * Highlight current viewport
 * Click/drag/scroll the minimap to navigate the diagram
-
+* Optimized to not impact modeling performance
 
 ## Usage
 
