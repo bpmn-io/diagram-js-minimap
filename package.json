@@ -15,8 +15,8 @@
     "build": "rollup -c --bundleConfigAsCjs",
     "build:watch": "run-s bundle -- -w",
     "test:build": "karma start test/distro/karma.conf.js",
-    "prepublishOnly": "run-s distro",
-    "lint:theme": "bpmn-io-theme-validate assets/diagram-js-minimap.css"
+    "lint:theme": "bpmn-io-theme-validate assets/diagram-js-minimap.css",
+    "prepare": "run-s build"
   },
   "repository": {
     "type": "git",
