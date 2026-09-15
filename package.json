@@ -7,7 +7,7 @@
   "umd:main": "dist/diagram-minimap.umd.js",
   "source": "lib/index.js",
   "scripts": {
-    "all": "run-s lint test distro",
+    "all": "run-s lint lint:theme test distro",
     "lint": "eslint .",
     "dev": "npm test -- --auto-watch --no-single-run",
     "test": "karma start",
@@ -15,7 +15,8 @@
     "build": "rollup -c --bundleConfigAsCjs",
     "build:watch": "run-s bundle -- -w",
     "test:build": "karma start test/distro/karma.conf.js",
-    "prepublishOnly": "run-s distro"
+    "prepublishOnly": "run-s distro",
+    "lint:theme": "bpmn-io-theme-validate assets/diagram-js-minimap.css"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
   "author": "Philipp Fromme",
   "license": "MIT",
   "devDependencies": {
+    "@bpmn-io/theme": "^0.2.0",
     "@rollup/plugin-commonjs": "^29.0.3",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^1.0.0",

@@ -1,12 +1,34 @@
+/**
+ * Semantic tokens, copied from `@bpmn-io/theme` to style the components
+ * according to this theme.
+ *
+ * Names and values of the tokens should stay intact with the `@bpmn-io/theme`
+ * source of truth, to ensure matching styles and allow overrides with an
+ * alternative theme.
+ */
+.bio-theme-parent {
+  --bio-surface: hsl(0, 0%, 100%);
+  --bio-border: hsl(225, 10%, 75%);
+  --bio-radius-lg: 4px;
+}
+
 .djs-minimap {
+  --minimap-background-color: color-mix(in srgb, var(--bio-surface) 90%, transparent);
+  --minimap-border-color: var(--bio-border);
+  --minimap-border-radius: var(--bio-radius-lg);
+  --minimap-overlay-background-color: color-mix(in srgb, var(--bio-surface) 20%, transparent);
+
+  /* set apart from the selection accent, so the viewport does not read as a selection */
+  --minimap-viewport-border-color: orange;
+
   position: absolute;
   top: 20px;
   right: 20px;
   z-index: 175; /* keep minimap above canvas overlays (e.g. context pads) but below popup menus */
   overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.9);
-  border: solid 1px #CCC;
-  border-radius: 2px;
+  background-color: var(--minimap-background-color);
+  border: solid 1px var(--minimap-border-color);
+  border-radius: var(--minimap-border-radius);
   box-sizing: border-box;
   user-select: none;
   -moz-user-select: none;
@@ -59,7 +81,7 @@
 
 .djs-minimap .viewport-dom {
   position: absolute;
-  border: solid 2px orange;
+  border: solid 2px var(--minimap-viewport-border-color);
   border-radius: 2px;
   box-sizing: border-box;
   cursor: move;
@@ -75,7 +97,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--minimap-overlay-background-color);
   pointer-events: none;
 }
 
