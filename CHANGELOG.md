@@ -6,7 +6,9 @@ All notable changes to [diagram-js-minimap](https://github.com/bpmn-io/diagram-j
 
 ___Note:__ Yet to be released changes appear here._
 
-* `FEAT`: source colors from `@bpmn-io/theme`
+## 5.5.0
+
+* `FEAT`: source colors and corner radius from `@bpmn-io/theme` ([#120](https://github.com/bpmn-io/diagram-js-minimap/pull/120))
 
 ## 5.4.1
 
