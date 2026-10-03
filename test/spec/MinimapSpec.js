@@ -426,6 +426,82 @@ describe('minimap', function() {
   });
 
 
+  describe('toggle', function() {
+
+    describe('closed', function() {
+
+      beforeEach(bootstrapDiagram({
+        modules: viewerModules
+      }));
+
+
+      it('should be button', inject(function(minimap) {
+
+        // when
+        var toggle = minimap._toggle;
+
+        // then
+        expect(toggle.tagName).to.eql('BUTTON');
+        expect(toggle.type).to.eql('button');
+      }));
+
+
+      it('should be focusable', inject(function(minimap) {
+
+        // when
+        minimap._toggle.focus();
+
+        // then
+        expect(document.activeElement).to.equal(minimap._toggle);
+      }));
+
+
+      it('should be collapsed initially', inject(function(minimap) {
+
+        // then
+        expect(minimap._toggle.getAttribute('aria-expanded')).to.eql('false');
+      }));
+
+
+      it('should keep <aria-expanded> in sync on click', inject(function(minimap) {
+
+        // when
+        minimap._toggle.click();
+
+        // then
+        expect(minimap._toggle.getAttribute('aria-expanded')).to.eql('true');
+
+        // when
+        minimap._toggle.click();
+
+        // then
+        expect(minimap._toggle.getAttribute('aria-expanded')).to.eql('false');
+      }));
+
+    });
+
+
+    describe('open', function() {
+
+      beforeEach(bootstrapDiagram({
+        modules: viewerModules,
+        minimap: {
+          open: true
+        }
+      }));
+
+
+      it('should be expanded initially', inject(function(minimap) {
+
+        // then
+        expect(minimap._toggle.getAttribute('aria-expanded')).to.eql('true');
+      }));
+
+    });
+
+  });
+
+
   describe('mousemove', function() {
 
     beforeEach(bootstrapDiagram({

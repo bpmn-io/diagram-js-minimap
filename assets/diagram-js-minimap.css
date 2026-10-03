@@ -58,6 +58,22 @@
   text-align: center;
 }
 
+.djs-minimap .toggle {
+  display: block;
+  margin: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.djs-minimap .toggle:focus-visible {
+
+  /* keep focus ring inside, the minimap clips overflow */
+  outline-offset: -2px;
+}
+
 .djs-minimap .toggle:before {
   content: attr(title);
 }
