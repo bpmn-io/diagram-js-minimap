@@ -18,6 +18,8 @@ import {
 } from '../TestHelper';
 
 import { expect } from 'chai';
+
+import { assign } from 'min-dash';
 import { spy } from 'sinon';
 
 import minimapModule from '../../lib';
@@ -631,6 +633,441 @@ describe('minimap', function() {
         // then
         expectMinimapShapeToNotExist('A');
         expectMinimapShapeToExist('B');
+      }));
+
+  });
+
+
+  describe('parent context', function() {
+
+    var rootA, rootB, rootC, subA, subB;
+
+    function levels(root) {
+      if (root.id === 'rootB') {
+        return [ { root: rootA, focus: subA, label: 'Level A' } ];
+      }
+
+      if (root.id === 'rootC') {
+        return [
+          { root: rootA, focus: subA, label: 'Level A' },
+          { root: rootB, focus: subB, label: 'Level B' }
+        ];
+      }
+
+      return null;
+    }
+
+    beforeEach(bootstrapDiagram({
+      modules: viewerModules,
+      minimap: {
+        open: true,
+        parentContext: function(root) {
+          return levels(root);
+        }
+      }
+    }));
+
+    beforeEach(inject(function(canvas, elementFactory) {
+
+      function addRoot(id, shapes) {
+        var root = elementFactory.createRoot({ id: id });
+
+        canvas.addRootElement(root);
+
+        shapes.forEach(function(s) {
+          canvas.addShape(elementFactory.createShape(s), root);
+        });
+
+        return root;
+      }
+
+      rootA = addRoot('rootA', [
+        { id: 'subA', x: 50, y: 50, width: 100, height: 80 },
+        { id: 'otherA', x: 300, y: 50, width: 100, height: 80 }
+      ]);
+
+      rootB = addRoot('rootB', [
+        { id: 'subB', x: 50, y: 50, width: 100, height: 80 }
+      ]);
+
+      rootC = addRoot('rootC', [
+        { id: 'innerC', x: 50, y: 50, width: 100, height: 80 }
+      ]);
+
+      subA = rootA.children[0];
+      subB = rootB.children[0];
+    }));
+
+
+    function contextPanels(minimap) {
+      return domQueryAll('.context-level', minimap._parent);
+    }
+
+
+    withDiagramJs('>=8')('should keep map on active root',
+      inject(function(canvas) {
+
+        // when
+        canvas.setRootElement(rootB);
+
+        // then
+        expectMinimapShapeToExist('subB');
+        expectMinimapShapeToNotExist('subA');
+      }));
+
+
+    withDiagramJs('>=8')('should render ancestor level',
+      inject(function(canvas, minimap) {
+
+        // when
+        canvas.setRootElement(rootB);
+
+        // then
+        var panels = contextPanels(minimap);
+
+        expect(panels).to.have.length(1);
+        expect(panels[0].querySelectorAll('.djs-minimap-focus')).to.have.length(1);
+        expect(panels[0].querySelector('.context-header').textContent).to.equal('Parent: Level A');
+      }));
+
+
+    withDiagramJs('>=8')('should render multiple levels, outermost first',
+      inject(function(canvas, minimap) {
+
+        // when
+        canvas.setRootElement(rootC);
+
+        // then
+        var panels = contextPanels(minimap);
+
+        expect(panels).to.have.length(2);
+        expect(panels[0].querySelector('.context-header').textContent).to.equal('2 levels up: Level A');
+        expect(panels[1].querySelector('.context-header').textContent).to.equal('Parent: Level B');
+      }));
+
+
+    withDiagramJs('>=8')('should render no levels without context',
+      inject(function(canvas, minimap) {
+
+        // given
+        canvas.setRootElement(rootC);
+
+        // when
+        canvas.setRootElement(rootA);
+
+        // then
+        expect(contextPanels(minimap)).to.have.length(0);
+        expect(minimap._parent.classList.contains('has-context')).to.be.false;
+      }));
+
+
+    function expand(panel) {
+      panel.querySelector('.context-header').click();
+    }
+
+    function viewBoxOf(panel) {
+      return panel.querySelector('svg').getAttribute('viewBox').split(' ').map(Number);
+    }
+
+    function wheel(panel, options) {
+      var svg = panel.querySelector('svg'),
+          rect = svg.getBoundingClientRect();
+
+      svg.dispatchEvent(new WheelEvent('wheel', Object.assign({
+        bubbles: true,
+        cancelable: true,
+        clientX: rect.left + rect.width / 2,
+        clientY: rect.top + rect.height / 2
+      }, options)));
+    }
+
+
+    withDiagramJs('>=8')('should zoom ancestor level on ctrl + wheel',
+      inject(function(canvas, minimap) {
+
+        // given
+        canvas.setRootElement(rootB);
+
+        var panel = contextPanels(minimap)[0];
+
+        expand(panel);
+
+        var before = viewBoxOf(panel),
+            canvasViewbox = canvas.viewbox();
+
+        // when
+        wheel(panel, { deltaY: -50, ctrlKey: true });
+
+        // then
+        expect(viewBoxOf(panel)[2]).to.be.below(before[2]);
+        expect(canvas.viewbox().scale).to.equal(canvasViewbox.scale);
+      }));
+
+
+    withDiagramJs('>=8')('should not zoom ancestor level on plain wheel',
+      inject(function(canvas, minimap) {
+
+        // given
+        canvas.setRootElement(rootB);
+
+        var panel = contextPanels(minimap)[0];
+
+        expand(panel);
+
+        var before = viewBoxOf(panel);
+
+        // when
+        wheel(panel, { deltaY: -50 });
+
+        // then
+        expect(viewBoxOf(panel)).to.eql(before);
+      }));
+
+
+    withDiagramJs('>=8')('should limit zoom of ancestor level',
+      inject(function(canvas, minimap) {
+
+        // given
+        canvas.setRootElement(rootB);
+
+        var panel = contextPanels(minimap)[0];
+
+        expand(panel);
+
+        var initial = viewBoxOf(panel);
+
+        // when
+        for (var i = 0; i < 100; i++) {
+          wheel(panel, { deltaY: -50, ctrlKey: true });
+        }
+
+        var zoomedIn = viewBoxOf(panel)[2];
+
+        for (i = 0; i < 100; i++) {
+          wheel(panel, { deltaY: 50, ctrlKey: true });
+        }
+
+        // then
+        expect(initial[2] / zoomedIn).to.be.closeTo(8, 0.001);
+        expect(viewBoxOf(panel)[2]).to.be.closeTo(initial[2], 0.001);
+      }));
+
+
+    withDiagramJs('>=8')('should reset ancestor level on double click',
+      inject(function(canvas, minimap) {
+
+        // given
+        canvas.setRootElement(rootB);
+
+        var panel = contextPanels(minimap)[0];
+
+        expand(panel);
+
+        var initial = viewBoxOf(panel);
+
+        wheel(panel, { deltaY: -50, ctrlKey: true });
+
+        // when
+        panel.querySelector('svg').dispatchEvent(new MouseEvent('dblclick', { bubbles: true }));
+
+        // then
+        expect(viewBoxOf(panel)).to.eql(initial);
+      }));
+
+
+    withDiagramJs('>=8')('should zoom ancestor levels individually',
+      inject(function(canvas, minimap) {
+
+        // given
+        canvas.setRootElement(rootC);
+
+        var panels = contextPanels(minimap);
+
+        expand(panels[0]);
+        expand(panels[1]);
+
+        var second = viewBoxOf(panels[1]);
+
+        // when
+        wheel(panels[0], { deltaY: -50, ctrlKey: true });
+
+        // then
+        expect(viewBoxOf(panels[1])).to.eql(second);
+      }));
+
+
+    withDiagramJs('>=8')('should collapse ancestor levels by default',
+      inject(function(canvas, minimap) {
+
+        // when
+        canvas.setRootElement(rootC);
+
+        // then
+        contextPanels(minimap).forEach(function(panel) {
+          expect(panel.classList.contains('expanded')).to.be.false;
+          expect(panel.querySelector('.context-body').offsetHeight).to.equal(0);
+        });
+      }));
+
+
+    withDiagramJs('>=8')('should expand ancestor level on header click',
+      inject(function(canvas, minimap) {
+
+        // given
+        canvas.setRootElement(rootB);
+
+        var panel = contextPanels(minimap)[0];
+
+        // when
+        expand(panel);
+
+        // then
+        expect(panel.classList.contains('expanded')).to.be.true;
+        expect(panel.querySelector('.context-header').getAttribute('aria-expanded')).to.equal('true');
+        expect(panel.querySelector('.context-body').offsetHeight).to.be.above(0);
+      }));
+
+
+    withDiagramJs('>=8')('should keep viewport aligned with map when expanding',
+      inject(function(canvas, minimap) {
+
+        // given
+        canvas.setRootElement(rootB);
+
+        var panel = contextPanels(minimap)[0],
+            viewport = minimap._viewportDom;
+
+        var before = viewport.getBoundingClientRect().top;
+
+        // when
+        expand(panel);
+
+        // then: map moved down by the body height, viewport follows
+        var after = viewport.getBoundingClientRect().top,
+            map = minimap._map.getBoundingClientRect(),
+            mapTop = map.top;
+
+        expect(after).to.be.above(before);
+        expect(Math.abs(after - mapTop - (viewport.offsetTop - (mapTop - minimap._parent.getBoundingClientRect().top)))).to.be.below(1);
+      }));
+
+
+    withDiagramJs('>=8')('should not let viewport take clicks on ancestor level',
+      inject(function(canvas, minimap) {
+
+        // given
+        canvas.setRootElement(rootB);
+
+        var panel = contextPanels(minimap)[0];
+
+        expand(panel);
+
+        // hit testing only works for points inside the window
+        panel.scrollIntoView();
+
+        // the viewport can extend over the levels
+        var rect = panel.getBoundingClientRect();
+
+        assign(minimap._viewportDom.style, {
+          top: '-1000px',
+          left: '-1000px',
+          width: '4000px',
+          height: '4000px'
+        });
+
+        // when
+        var target = document.elementFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+        // then
+        expect(panel.contains(target)).to.be.true;
+      }));
+
+
+    withDiagramJs('>=8')('should center hover zoom on focus element',
+      inject(function(canvas, minimap) {
+
+        // given
+        canvas.setRootElement(rootB);
+
+        var panel = contextPanels(minimap)[0];
+
+        expand(panel);
+
+        // when
+        panel.querySelector('.context-body').dispatchEvent(new MouseEvent('mouseenter'));
+
+        // then
+        var origin = panel.querySelector('svg').style.getPropertyValue('--minimap-context-zoom-origin');
+
+        expect(origin).to.match(/^-?[\d.]+px -?[\d.]+px$/);
+      }));
+
+
+    withDiagramJs('>=8')('should label levels by distance',
+      inject(function(canvas, minimap) {
+
+        // given
+        canvas.setRootElement(rootC);
+
+        // then
+        var headers = Array.from(contextPanels(minimap)).map(function(panel) {
+          return panel.querySelector('.context-header').textContent;
+        });
+
+        expect(headers).to.eql([ '2 levels up: Level A', 'Parent: Level B' ]);
+      }));
+
+
+    withDiagramJs('>=8')('should allow overriding the level prefix',
+      inject(function(canvas, minimap) {
+
+        // given
+        minimap._config.parentContextPrefix = function(distance) {
+          return distance === 1 ? '' : '^' + distance;
+        };
+
+        // when
+        canvas.setRootElement(rootC);
+
+        // then
+        var headers = Array.from(contextPanels(minimap)).map(function(panel) {
+          return panel.querySelector('.context-header').textContent;
+        });
+
+        expect(headers).to.eql([ '^2 Level A', 'Level B' ]);
+      }));
+
+
+    withDiagramJs('>=8')('should remember expanded ancestor level',
+      inject(function(canvas, minimap) {
+
+        // given
+        canvas.setRootElement(rootB);
+        expand(contextPanels(minimap)[0]);
+
+        // when
+        canvas.setRootElement(rootC);
+
+        // then
+        var panels = contextPanels(minimap);
+
+        expect(panels[0].classList.contains('expanded')).to.be.true;
+        expect(panels[1].classList.contains('expanded')).to.be.false;
+      }));
+
+
+    withDiagramJs('>=8')('should render levels when opened later',
+      inject(function(canvas, minimap) {
+
+        // given
+        minimap.close();
+        canvas.setRootElement(rootB);
+
+        // when
+        minimap.open();
+
+        // then
+        expect(contextPanels(minimap)).to.have.length(1);
       }));
 
   });

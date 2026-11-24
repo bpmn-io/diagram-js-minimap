@@ -57,6 +57,30 @@ var bpmnModeler = new BpmnModeler({
 ```
 
 
+### Ancestor levels (proof of concept)
+
+Roots can be nested, for instance when subprocesses are drilled down into as planes in [bpmn-js](https://github.com/bpmn-io/bpmn-js). The minimap always shows the active root. With `parentContext` it additionally lists the levels above it, collapsed by default, so users keep their bearings:
+
+```javascript
+minimap: {
+  parentContext: function(activeRoot) {
+
+    // levels, outermost first; return null for none
+    return [
+      { root: outerRoot, focus: shapeLeadingToNextLevel, label: 'Order process' },
+      { root: innerRoot, focus: otherShape, label: 'Check items' }
+    ];
+  },
+
+  // optional: replace "Parent:", "2 levels up:", ... (string or function of the distance)
+  parentContextPrefix: function(distance) {
+    return distance === 1 ? 'Parent:' : distance + ' levels up:';
+  }
+}
+```
+
+Each level is `{ root, focus, label }`: the root to draw, the element on it to highlight, and a caption. A level expands on click; expanded levels zoom with Ctrl + wheel (or pinch), pan by dragging, reset on double click and zoom in place on hover.
+
 ## License
 
 MIT

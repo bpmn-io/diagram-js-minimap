@@ -82,7 +82,7 @@
   position: absolute;
   right: 0;
   padding: 6px;
-  z-index: 1;
+  z-index: 3;
 }
 
 .djs-minimap .map {
@@ -123,4 +123,93 @@
 
 .djs-minimap .cursor-move {
   cursor: move;
+}
+
+/* ancestor levels, see `parentContext` config */
+.djs-minimap .contexts {
+  display: none;
+}
+
+.djs-minimap.open .contexts {
+  display: block;
+
+  /* above the viewport, which can reach over the levels and would take their clicks */
+  position: relative;
+  z-index: 2;
+  background: var(--bio-surface);
+}
+
+.djs-minimap .context-level {
+  width: 320px;
+  border-bottom: solid 1px var(--minimap-border-color);
+  box-sizing: border-box;
+}
+
+.djs-minimap .context-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  height: 24px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 11px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.djs-minimap .context-header:before {
+  content: '▸';
+  opacity: 0.6;
+}
+
+.djs-minimap .context-level.expanded .context-header:before {
+  content: '▾';
+}
+
+.djs-minimap .context-header:focus-visible {
+  outline-offset: -2px;
+}
+
+/* stays laid out while collapsed so the content can be measured */
+.djs-minimap .context-body {
+  height: 0;
+  overflow: hidden;
+}
+
+.djs-minimap .context-level.expanded .context-body {
+  height: 140px;
+  border-top: solid 1px var(--minimap-border-color);
+  cursor: grab;
+}
+
+.djs-minimap .context-level.expanded .context-body:active {
+  cursor: grabbing;
+}
+
+/*
+ * Hover zoom: the content of an expanded level zooms in place, centered on
+ * the highlighted element. The level keeps its size.
+ */
+.djs-minimap .context-level.expanded .context-body svg {
+  transform-origin: var(--minimap-context-zoom-origin, 50% 50%);
+  transition: transform 0.15s ease-out 0s;
+}
+
+.djs-minimap .context-level.expanded .context-body:hover svg {
+  transform: scale(var(--minimap-context-hover-scale, 2.5));
+  transition-delay: 0.25s;
+}
+
+.djs-minimap .djs-minimap-focus > rect:first-child {
+  stroke: var(--minimap-viewport-border-color) !important;
+  stroke-width: 6px !important;
+  fill: color-mix(in srgb, var(--minimap-viewport-border-color) 25%, transparent) !important;
 }
